@@ -35,6 +35,11 @@ export default function TabLayout() {
 
   const handleClick = (event: React.MouseEvent) => {
     if (!ref.current) return;
+    if (
+      // @ts-ignore
+      event.target.className !== "screen-h screen-w flex main-content relative"
+    )
+      return;
     event.stopPropagation();
     const light = ((event.clientY / ref.current?.offsetHeight) *
       100) as IntRange<0, 100>;

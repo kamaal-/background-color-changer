@@ -51,14 +51,39 @@ export default function useColorChange(): ColorChangeHookReturnType {
     setCurrentColorIndex(0);
   }, [colors]);
 
+  const handleSaturationChange = React.useCallback(
+    (_saturate: IntRange<0, 100>) => {
+      setColors((existing) => [
+        ...existing,
+        getHSLWithRandomHue(getRandomHue(), _saturate, light),
+      ]);
+
+      setSaturate(_saturate);
+      setCurrentColorIndex(colors.length);
+    },
+    [light, colors],
+  );
+
+  const handleLightChange = React.useCallback(
+    (_light: IntRange<0, 100>) => {
+      setColors((existing) => [
+        ...existing,
+        getHSLWithRandomHue(getRandomHue(), saturate, _light),
+      ]);
+      setLight(_light);
+      setCurrentColorIndex(colors.length);
+    },
+    [saturate, colors],
+  );
+
   return {
     handleColorChange,
     hslColorString,
     textColor,
-    setSaturate,
+    setSaturate: handleSaturationChange,
     saturate,
     light,
-    setLight,
+    setLight: handleLightChange,
     setCurrentColorIndex,
     colors,
     currentColorIndex,

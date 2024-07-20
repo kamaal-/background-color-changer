@@ -9,6 +9,14 @@ type Props = {
 };
 
 function RangeSlider({ setValue, value, label, name = "range" }: Props) {
+  const handleChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.stopPropagation();
+      setValue(parseInt(event.target.value, 10) as IntRange<0, 100>);
+    },
+    [setValue],
+  );
+
   return (
     <div className="flex slider roboto-ligh">
       <label htmlFor={name}>
@@ -23,9 +31,7 @@ function RangeSlider({ setValue, value, label, name = "range" }: Props) {
         max="100"
         value={value}
         name={name}
-        onChange={(e) =>
-          setValue(parseInt(e.target.value, 10) as IntRange<0, 100>)
-        }
+        onChange={handleChange}
       />
     </div>
   );
