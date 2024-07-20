@@ -22,6 +22,7 @@ export type ColorChangeHookReturnType = {
   light: IntRange<0, 100>;
   setCurrentColorIndex: (index: number) => void;
   colors: Array<HSLColor>;
+  currentColorIndex: number;
 };
 
 export interface RGBColor {

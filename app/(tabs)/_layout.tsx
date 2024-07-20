@@ -24,6 +24,7 @@ export default function TabLayout() {
     setLight,
     colors,
     setCurrentColorIndex,
+    currentColorIndex,
   } = useColorChange();
 
   const [fontsLoaded] = useFonts({ Inter_400Regular });
@@ -53,7 +54,7 @@ export default function TabLayout() {
     >
       <AllColors
         colors={colors}
-        selectedIndex={0}
+        selectedIndex={currentColorIndex}
         setSelectedIndex={setCurrentColorIndex}
       />
 

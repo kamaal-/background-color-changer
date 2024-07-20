@@ -53,5 +53,6 @@ export default function useColorChange(): ColorChangeHookReturnType {
     setLight,
     setCurrentColorIndex,
     colors,
+    currentColorIndex,
   };
 }
