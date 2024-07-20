@@ -1,4 +1,12 @@
-import {getBrightness, getHSLWithRandomHue, getRandomHue, hslToHslString, hslToRGB} from "@/lib/helpers/utils";
+import {
+    getBrightness,
+    getHSLWithRandomHue,
+    getRandomHue,
+    getTextColorByBrightnes,
+    hslToHslString,
+    hslToRGB
+} from "@/lib/helpers/utils";
+import {getTextColor} from "@expo/metro-runtime/build/error-overlay/UI/LogBoxStyle";
 
 describe("Helper functions", () => {
     let hue = 0;
@@ -47,5 +55,13 @@ describe("Helper functions", () => {
 
     test("Should convert to hsl() color with light: ", () => {
         expect(hslToHslString(getHSLWithRandomHue(hue, 57, 94))).toBe(`hsl(${hue}, 57%, 94%)`)
+    });
+
+    test("Should return black color for light bg", () => {
+        expect(getTextColorByBrightnes(getBrightness(hslToRGB(getHSLWithRandomHue(50, 50, 89))))).toBe("#222")
+    });
+
+    test("Should return white color for dark bg", () => {
+        expect(getTextColorByBrightnes(getBrightness(hslToRGB(getHSLWithRandomHue(50, 50, 28))))).toBe("#FFF")
     });
 })

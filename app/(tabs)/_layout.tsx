@@ -7,18 +7,39 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import useColorChange from "@/hooks/useColorChange";
 import "../../lib/web.css"
 import RangeSlider from "@/components/range-slider";
+import {useFonts, Inter_400Regular} from '@expo-google-fonts/inter';
+import AllColors from "@/components/all-colors";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { handleColorChange, hslColorString, textColor, setSaturate, saturate, light, setLight} = useColorChange();
+  const { handleColorChange,
+      hslColorString,
+      textColor,
+      setSaturate,
+      saturate,
+      light,
+      setLight,
+      colors,
+      setCurrentColorIndex
+  } = useColorChange();
+
+    let [fontsLoaded] = useFonts({
+        Inter_400Regular,
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
 
   return (Platform.OS === 'web') ? (
-      <div onClick={() => {handleColorChange()}} className={"screen-h screen-w flex main-content relative"} style={{backgroundColor: hslColorString}}>
-          <div className={"absolute settings"}>
-              <RangeSlider value={saturate} setValue={setSaturate} />
-              <RangeSlider value={light} setValue={setLight} />
+      <div onClick={() => {handleColorChange()}} className={"screen-h screen-w flex main-content relative"} style={{backgroundColor: hslColorString, fontFamily: 'Inter_400Regular',}}>
+          <AllColors colors={colors} selectedIndex={0} setSelectedIndex={setCurrentColorIndex}/>
+
+          <div className={"absolute settings flex"}>
+              <RangeSlider label={"Saturation"} name={"saturate"} value={saturate} setValue={setSaturate} />
+              <RangeSlider label={"Brightness"} name={"brightness"} value={light} setValue={setLight} />
           </div>
-          <div  style={{color: textColor}}>Hello there</div>
+          <div className={"text-lg"} style={{color: textColor, userSelect: "none" }}>Hello there</div>
       </div>
       ) : (
     <Tabs

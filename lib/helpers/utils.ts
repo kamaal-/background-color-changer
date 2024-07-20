@@ -50,3 +50,6 @@ export const hslToHslString = ( {h, s, l}: HSLColor): string => `hsl(${h}, ${s}%
 
 // See http://www.w3.org/TR/AERT#color-contrast
 export const getBrightness = ({ r, g, b }: RGBColor): number => (r * 299 + g * 587 + b * 114) / 1000;
+
+
+export const getTextColorByBrightnes = (brightness: number): "#222" | "#FFF"  => brightness > 128 ? "#222": "#FFF"

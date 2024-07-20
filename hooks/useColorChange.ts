@@ -1,4 +1,11 @@
-import {getBrightness, getHSLWithRandomHue, getRandomHue, hslToHslString, hslToRGB} from "@/lib/helpers/utils";
+import {
+    getBrightness,
+    getHSLWithRandomHue,
+    getRandomHue,
+    getTextColorByBrightnes,
+    hslToHslString,
+    hslToRGB
+} from "@/lib/helpers/utils";
 import {ColorChangeHookReturnType, HSLColor, IntRange} from "@/lib/types";
 import React from "react";
 
@@ -16,10 +23,8 @@ export default function useColorChange():ColorChangeHookReturnType {
     const hslColorString = React.useMemo(() =>
         hslToHslString(colors[currentColorIndex]), [colors, currentColorIndex]);
 
-    const textColor: "#FFF" | "#222" = React.useMemo(() => {
-        console.log(colors[currentColorIndex])
-        return getBrightness(hslToRGB(colors[currentColorIndex])) > 128 ? "#222": "#FFF"
-    }, [colors, currentColorIndex])
+    const textColor: "#FFF" | "#222" = React.useMemo(() => getTextColorByBrightnes(getBrightness(hslToRGB(colors[currentColorIndex])))
+    , [colors, currentColorIndex])
 
     return {
         handleColorChange,
@@ -28,7 +33,9 @@ export default function useColorChange():ColorChangeHookReturnType {
         setSaturate,
         saturate,
         light,
-        setLight
+        setLight,
+        setCurrentColorIndex,
+        colors
     }
 
 }

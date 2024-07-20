@@ -12,6 +12,8 @@ export type ColorChangeHookReturnType = {
     saturate: IntRange<0, 100>;
     setLight: (value:IntRange<0, 100>) => void;
     light: IntRange<0, 100>;
+    setCurrentColorIndex: (index: number) => void;
+    colors: Array<HSLColor>
 }
 
 export interface RGBColor {
