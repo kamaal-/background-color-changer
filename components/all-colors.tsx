@@ -15,10 +15,15 @@ type ColorBoxProps = {
     setSelectedIndex: (index: number) => void;
 }
 
-function ColorBox({color, index}: ColorBoxProps){
+function ColorBox({color, index, setSelectedIndex}: ColorBoxProps){
     const colorString = React.useMemo(() => hslToHslString(color), [color])
-    const textColor = React.useMemo(() => getTextColorByBrightnes(getBrightness(hslToRGB(color))), [color])
-    return <div className={"color-box flex "} style={{backgroundColor: colorString, color: textColor}}>{index + 1}</div>
+    const textColor = React.useMemo(() => getTextColorByBrightnes(getBrightness(hslToRGB(color))), [color]);
+
+    return <div onClick={(e) =>
+    {
+        e.stopPropagation();
+        setSelectedIndex(index)
+    }} className={"color-box flex "} style={{backgroundColor: colorString, color: textColor}}>{index + 1}</div>
 }
 
 function AllColors({colors, selectedIndex, setSelectedIndex}:Props) {

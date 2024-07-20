@@ -32,7 +32,10 @@ export default function TabLayout() {
     }
 
   return (Platform.OS === 'web') ? (
-      <div onClick={() => {handleColorChange()}} className={"screen-h screen-w flex main-content relative"} style={{backgroundColor: hslColorString, fontFamily: 'Inter_400Regular',}}>
+      <div onClick={(e) => {
+          e.stopPropagation();
+          handleColorChange()
+      }} className={"screen-h screen-w flex main-content relative"} style={{backgroundColor: hslColorString, fontFamily: 'Inter_400Regular',}}>
           <AllColors colors={colors} selectedIndex={0} setSelectedIndex={setCurrentColorIndex}/>
 
           <div className={"absolute settings flex"}>
