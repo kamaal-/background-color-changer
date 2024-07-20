@@ -1,0 +1,6 @@
+# Ignore artifacts:
+dist
+docker
+public
+.expo
+.idea
