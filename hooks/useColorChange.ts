@@ -25,15 +25,16 @@ export default function useColorChange(): ColorChangeHookReturnType {
       ]);
       setLight(_light);
       setSaturate(_saturate);
-      setCurrentColorIndex((i) => i + 1);
+      setCurrentColorIndex(colors.length);
     },
-    [],
+    [colors],
   );
 
-  const hslColorString = React.useMemo(
-    () => hslToHslString(colors[currentColorIndex]),
-    [colors, currentColorIndex],
-  );
+  const hslColorString = React.useMemo(() => {
+    if (currentColorIndex < colors.length)
+      return hslToHslString(colors[currentColorIndex]);
+    return hslToHslString(colors[0]);
+  }, [colors, currentColorIndex]);
 
   const textColor: "#FFF" | "#222" = React.useMemo(
     () =>
@@ -42,6 +43,13 @@ export default function useColorChange(): ColorChangeHookReturnType {
       ),
     [colors, currentColorIndex],
   );
+
+  const clearAllColors = React.useCallback(() => {
+    const color = colors[0];
+    console.log(color);
+    setColors([color]);
+    setCurrentColorIndex(0);
+  }, [colors]);
 
   return {
     handleColorChange,
@@ -54,5 +62,6 @@ export default function useColorChange(): ColorChangeHookReturnType {
     setCurrentColorIndex,
     colors,
     currentColorIndex,
+    clearAllColors,
   };
 }

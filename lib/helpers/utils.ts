@@ -66,4 +66,4 @@ export const getBrightness = ({ r, g, b }: RGBColor): number =>
   (r * 299 + g * 587 + b * 114) / 1000;
 
 export const getTextColorByBrightnes = (brightness: number): "#222" | "#FFF" =>
-  brightness > 130 ? "#222" : "#FFF";
+  brightness > 120 ? "#222" : "#FFF";
