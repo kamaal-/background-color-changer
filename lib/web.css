@@ -1,0 +1,24 @@
+.screen-w {
+    width: 100vw;
+}
+.screen-h {
+    height: 100vh;
+}
+.flex {
+    display: flex;
+}
+.relative {
+    position: relative;
+}
+.absolute {
+    position: absolute;
+}
+.main-content {
+    justify-content: center;
+    align-items: center;
+}
+
+.settings {
+    right: 0.5rem;
+    top: 0.5rem;
+}
